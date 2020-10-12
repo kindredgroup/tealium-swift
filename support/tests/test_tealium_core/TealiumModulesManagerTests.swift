@@ -309,15 +309,15 @@ class TealiumModulesManagerTests: XCTestCase {
         XCTAssertTrue(modulesManager.dispatchValidators.contains(where: { $0.id == "Dummy" }))
     }
 
-    func testDispatchListenerAddedFromConfig() {
-        let listener = DummyCollector(config: testTealiumConfig, delegate: self, diskStorage: nil) { _ in
-
-        }
-        let config = testTealiumConfig
-        config.dispatchListeners = [listener]
-        let modulesManager = self.modulesManagerForConfig(config: config)
-        XCTAssertTrue(modulesManager.dispatchListeners.contains(where: { ($0 as! DispatchValidator).id == "Dummy" }))
-    }
+//    func testDispatchListenerAddedFromConfig() {
+//        let listener = DummyCollector(config: testTealiumConfig, delegate: self, diskStorage: nil) { _ in
+//
+//        }
+//        let config = testTealiumConfig
+//        config.dispatchListeners = [listener]
+//        let modulesManager = self.modulesManagerForConfig(config: config)
+//        XCTAssertTrue(modulesManager.dispatchListeners.contains(where: { ($0 as! DispatchValidator).id == "Dummy" }))
+//    }
 
 }
 
