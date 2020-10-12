@@ -29,14 +29,14 @@ class WKWebViewTests: XCTestCase {
         XCTAssertEqual(tagManagementWKWebView.isWebViewReady, false, "Webview was unexpectedly initialized")
     }
 
-    func testEnableWebView() {
-        let expectation = self.expectation(description: "testEnableWebView")
-        tagManagementWKWebView.enable(webviewURL: testURL, delegates: nil, shouldAddCookieObserver: true, view: nil) { _, _ in
-            XCTAssertNotNil(self.tagManagementWKWebView.webview, "Webview instance was unexpectedly nil")
-            expectation.fulfill()
-        }
-        self.wait(for: [expectation], timeout: 5.0)
-    }
+//    func testEnableWebView() {
+//        let expectation = self.expectation(description: "testEnableWebView")
+//        tagManagementWKWebView.enable(webviewURL: testURL, delegates: nil, shouldAddCookieObserver: true, view: nil) { _, _ in
+//            XCTAssertNotNil(self.tagManagementWKWebView.webview, "Webview instance was unexpectedly nil")
+//            expectation.fulfill()
+//        }
+//        self.wait(for: [expectation], timeout: 5.0)
+//    }
 
     func testDisableWebView() {
         tagManagementWKWebView.enable(webviewURL: testURL, delegates: nil, shouldAddCookieObserver: true, view: nil, completion: nil)
