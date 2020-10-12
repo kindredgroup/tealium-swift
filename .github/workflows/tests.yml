@@ -32,12 +32,22 @@ jobs:
       - name: Test TealiumLifecycleTests-iOS
         run: fastlane scan --scheme TealiumLifecycleTests-iOS --output_files LifecycleTests-iOS.html
         working-directory: ${{env.working-directory}}
+      - name: Test TealiumVisitorServiceTests-iOS
+        run: fastlane scan --scheme TealiumVisitorServiceTests-iOS --output_files VisitorServiceTests-iOS.html
+        working-directory: ${{env.working-directory}}
+      - name: Test TealiumTagManagementTests-iOS
+        run: fastlane scan --scheme TealiumTagManagementTests-iOS --output_files TagManagementTests-iOS.html
+        working-directory: ${{env.working-directory}}
+      - name: Test TealiumRemoteCommandsTests-iOS
+        run: fastlane scan --scheme TealiumRemoteCommandsTests-iOS --output_files RemoteCommandsTests-iOS.html
+        working-directory: ${{env.working-directory}}
       - name: Test TealiumAttributionTests-iOS
         run: fastlane scan --scheme TealiumAttributionTests-iOS --output_files AttributionTests-iOS.html
         working-directory: ${{env.working-directory}}
       - name: Test TealiumAutoTrackingTests-iOS
         run: fastlane scan --scheme TealiumAutoTrackingTests-iOS --output_files AutotrackingTests-iOS.html
         working-directory: ${{env.working-directory}}
+        # todo: location tests
       - name: archive code coverage results
         uses: actions/upload-artifact@v2
         with:
@@ -67,6 +77,9 @@ jobs:
       - name: Test TealiumLifecycleTests-macOS
         run: fastlane scan --scheme TealiumLifecycleTests-macOS --output_files LifecycleTests-macOS.html
         working-directory: ${{env.working-directory}}
+      - name: Test TealiumVisitorServiceTests-macOS
+        run: fastlane scan --scheme TealiumVisitorServiceTests-macOS --output_files VisitorServiceTests-macOS.html
+        working-directory: ${{env.working-directory}}
       - name: archive code coverage results
         uses: actions/upload-artifact@v2
         with:
@@ -95,6 +108,9 @@ jobs:
         working-directory: ${{env.working-directory}}
       - name: Test TealiumLifecycleTests-tvOS
         run: fastlane scan --scheme TealiumLifecycleTests-tvOS --output_files LifecycleTests-tvOS.html
+        working-directory: ${{env.working-directory}}
+      - name: Test TealiumVisitorServiceTests-tvOS
+        run: fastlane scan --scheme TealiumVisitorServiceTests-tvOS --output_files VisitorServiceTests-tvOS.html
         working-directory: ${{env.working-directory}}
       - name: archive code coverage results
         uses: actions/upload-artifact@v2
