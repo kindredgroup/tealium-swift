@@ -9,7 +9,7 @@ on:
 
 jobs:
   test_iOS:
-    name: Build and Test
+    name: iOS Build and Test
     runs-on: macos-latest
     timeout-minutes: 60
     env: 
@@ -24,10 +24,19 @@ jobs:
         run: |
           brew install fastlane
       - name: Test TealiumCoreTests-iOS
-        run: fastlane scan --scheme TealiumCoreTests-iOS --output_files CollectTests-iOS.html
+        run: fastlane scan --scheme TealiumCoreTests-iOS --output_files CoreTests-iOS.html
         working-directory: ${{env.working-directory}}
       - name: Test TealiumCollectTests-iOS
-        run: fastlane scan --scheme TealiumCoreTests-iOS --output_files CoreTests-iOS.html
+        run: fastlane scan --scheme TealiumCollectTests-iOS --output_files CollectTests-iOS.html
+        working-directory: ${{env.working-directory}}
+      - name: Test TealiumLifecycleTests-iOS
+        run: fastlane scan --scheme TealiumLifecycleTests-iOS --output_files LifecycleTests-iOS.html
+        working-directory: ${{env.working-directory}}
+      - name: Test TealiumAttributionTests-iOS
+        run: fastlane scan --scheme TealiumAttributionTests-iOS --output_files AttributionTests-iOS.html
+        working-directory: ${{env.working-directory}}
+      - name: Test TealiumAutoTrackingTests-iOS
+        run: fastlane scan --scheme TealiumAutoTrackingTests-iOS --output_files AutotrackingTests-iOS.html
         working-directory: ${{env.working-directory}}
       - name: archive code coverage results
         uses: actions/upload-artifact@v2
@@ -35,7 +44,7 @@ jobs:
           name: code-coverage-report
           path: ${{env.working-directory}}/test_output/*.html
   test_macOS:
-    name: Build and Test
+    name: macOS Build and Test
     runs-on: macos-latest
     timeout-minutes: 60
     env: 
@@ -49,12 +58,46 @@ jobs:
       - name: install fastlane
         run: |
           brew install fastlane
-      - name: Test TealiumCoreTests-macOS --output_files CoreTests-macOS.html
-        run: fastlane scan --scheme TealiumCoreTests-macOS
+      - name: Test TealiumCoreTests-macOS
+        run: fastlane scan --scheme TealiumCoreTests-macOS --output_files CoreTests-macOS.html
+        working-directory: ${{env.working-directory}}
+      - name: Test TealiumCollectTests-macOS
+        run: fastlane scan --scheme TealiumCollectTests-macOS --output_files CollectTests-macOS.html
+        working-directory: ${{env.working-directory}}
+      - name: Test TealiumLifecycleTests-macOS
+        run: fastlane scan --scheme TealiumLifecycleTests-macOS --output_files LifecycleTests-macOS.html
         working-directory: ${{env.working-directory}}
       - name: archive code coverage results
         uses: actions/upload-artifact@v2
         with:
           name: code-coverage-report
           path: ${{env.working-directory}}/test_output/*.html
-          
+  test_tvOS:
+    name: tvOS Build and Test
+    runs-on: macos-latest
+    timeout-minutes: 60
+    env: 
+      DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
+      working-directory: ./builder
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.7'
+      - name: install fastlane
+        run: |
+          brew install fastlane
+      - name: Test TealiumCoreTests-macOS
+        run: fastlane scan --scheme TealiumCoreTests-tvOS --output_files CoreTests-tvOS.html
+        working-directory: ${{env.working-directory}}
+      - name: Test TealiumCollectTests-tvOS
+        run: fastlane scan --scheme TealiumCollectTests-tvOS --output_files CollectTests-tvOS.html
+        working-directory: ${{env.working-directory}}
+      - name: Test TealiumLifecycleTests-tvOS
+        run: fastlane scan --scheme TealiumLifecycleTests-tvOS --output_files LifecycleTests-tvOS.html
+        working-directory: ${{env.working-directory}}
+      - name: archive code coverage results
+        uses: actions/upload-artifact@v2
+        with:
+          name: code-coverage-report
+          path: ${{env.working-directory}}/test_output/*.html
