@@ -17,7 +17,7 @@ jobs:
       working-directory: ./builder
     strategy:
       matrix:
-        scheme: ["TealiumCoreTests-iOS", "TealiumCollect"]
+        scheme: ["TealiumCoreTests-iOS", "TealiumCollectTests-iOS"]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-ruby@v1
