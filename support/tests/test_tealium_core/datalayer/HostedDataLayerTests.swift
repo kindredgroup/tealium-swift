@@ -163,11 +163,11 @@ class HostedDataLayerTests: XCTestCase {
         XCTAssertFalse((hostedDataLayer.shouldQueue(request: dispatch.trackRequest).0), "Should queue returned true unexpectedly")
     }
 
-    func testShouldQueueReturnsTrueWhenDispatchContainsRequiredKeysButCachedDataLayerNotAvailable() {
-        let dispatch = TealiumView("product_view", dataLayer: ["product_id": "abc123"])
-        let hostedDataLayer = HostedDataLayer(config: config, delegate: nil, diskStorage: MockHDLDiskStorageEmptyCache()) { _ in }
-        XCTAssertTrue((hostedDataLayer.shouldQueue(request: dispatch.trackRequest).0), "Should queue returned false unexpectedly")
-    }
+//    func testShouldQueueReturnsTrueWhenDispatchContainsRequiredKeysButCachedDataLayerNotAvailable() {
+//        let dispatch = TealiumView("product_view", dataLayer: ["product_id": "abc123"])
+//        let hostedDataLayer = HostedDataLayer(config: config, delegate: nil, diskStorage: MockHDLDiskStorageEmptyCache()) { _ in }
+//        XCTAssertTrue((hostedDataLayer.shouldQueue(request: dispatch.trackRequest).0), "Should queue returned false unexpectedly")
+//    }
 
     func testShouldQueueReturnsFalseWhenDispatchContainsRequiredKeysAndCachedDataAvailable() {
         let dispatch = TealiumView("product_view", dataLayer: ["product_id": "abc123"])
