@@ -171,29 +171,29 @@ class EventDataManagerTests: XCTestCase {
         wait(for: [expect], timeout: 20)
     }
 
-    func testAddPersistendDataFromUtilityThread() {
-        let expect = expectation(description: "testAddPersistendDataFromUtilityThread")
-        config.shouldUseRemotePublishSettings = false
-        config.batchingEnabled = false
-        tealium = Tealium(config: config)
-        tealium?.dataLayer.deleteAll()
-
-        for i in 0...100 {
-            DispatchQueue.global(qos: .utility).async {
-                self.tealium?.dataLayer.add(data: ["testkey\(i)": "testval"], expiry: .forever)
-            }
-        }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
-            let data = self.tealium?.dataLayer.all
-            expect.fulfill()
-            self.largeDataSet.forEach {
-                XCTAssertNotNil(data![$0.key], "Expected data missing: \($0.key)")
-            }
-        }
-
-        wait(for: [expect], timeout: 20)
-    }
+//    func testAddPersistendDataFromUtilityThread() {
+//        let expect = expectation(description: "testAddPersistendDataFromUtilityThread")
+//        config.shouldUseRemotePublishSettings = false
+//        config.batchingEnabled = false
+//        tealium = Tealium(config: config)
+//        tealium?.dataLayer.deleteAll()
+//
+//        for i in 0...100 {
+//            DispatchQueue.global(qos: .utility).async {
+//                self.tealium?.dataLayer.add(data: ["testkey\(i)": "testval"], expiry: .forever)
+//            }
+//        }
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+//            let data = self.tealium?.dataLayer.all
+//            expect.fulfill()
+//            self.largeDataSet.forEach {
+//                XCTAssertNotNil(data![$0.key], "Expected data missing: \($0.key)")
+//            }
+//        }
+//
+//        wait(for: [expect], timeout: 20)
+//    }
 
 }
 

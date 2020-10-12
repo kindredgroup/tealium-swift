@@ -87,24 +87,24 @@ class TealiumLifecycleTests: XCTestCase {
         XCTAssertTrue(missingKeys.isEmpty, "Unexpected keys missing:\(missingKeys)")
     }
 
-    func testDayOfWeekLocal() {
-        let tz = TimeZone.current
-        var expectedDay = "0"
-        if tz.identifier.contains("London") {
-            // in 1970, the UK observed Daylight Savings (British Summer Time) for the whole year, hence local time at UTC 00:00:00 was 01:00:00
-            expectedDay = "5"
-        } else if tz.identifier.contains("Los_Angeles") || tz.identifier.contains("Phoenix") {
-            expectedDay = "4"
-        } else if tz.identifier.contains("Berlin") {
-            expectedDay = "5"
-        }
-
-        let date = Date(timeIntervalSince1970: 1)
-
-        let day = lifecycle!.dayOfWeekLocal(for: date)
-        // Thursday 1st January 1970, 1-indexed, starting from Sunday as day 1
-        XCTAssertTrue(day == expectedDay, "Mismatch in dayOfWeekLocal, returned: \(String(describing: day)), expected: \(expectedDay)")
-    }
+//    func testDayOfWeekLocal() {
+//        let tz = TimeZone.current
+//        var expectedDay = "0"
+//        if tz.identifier.contains("London") {
+//            // in 1970, the UK observed Daylight Savings (British Summer Time) for the whole year, hence local time at UTC 00:00:00 was 01:00:00
+//            expectedDay = "5"
+//        } else if tz.identifier.contains("Los_Angeles") || tz.identifier.contains("Phoenix") {
+//            expectedDay = "4"
+//        } else if tz.identifier.contains("Berlin") {
+//            expectedDay = "5"
+//        }
+//
+//        let date = Date(timeIntervalSince1970: 1)
+//
+//        let day = lifecycle!.dayOfWeekLocal(for: date)
+//        // Thursday 1st January 1970, 1-indexed, starting from Sunday as day 1
+//        XCTAssertTrue(day == expectedDay, "Mismatch in dayOfWeekLocal, returned: \(String(describing: day)), expected: \(expectedDay)")
+//    }
 
     // TODO: Refactor take test inputs and provided expected outputs
     func testDaysBetweenDates0() {
