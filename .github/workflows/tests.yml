@@ -15,6 +15,9 @@ jobs:
     env: 
       DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
       working-directory: ./builder
+    strategy:
+      matrix:
+        scheme: ["TealiumCoreTests-iOS", "TealiumCollect"]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-ruby@v1
@@ -23,30 +26,30 @@ jobs:
       - name: install fastlane
         run: |
           brew install fastlane
-      - name: Test TealiumCoreTests-iOS
-        run: fastlane scan --scheme TealiumCoreTests-iOS --output_files CoreTests-iOS.html
+      - name: Test - ${{ matrix.scheme }}
+        run: fastlane scan --scheme "${{ matrix.scheme }}" --output_files "${{ matrix.scheme }}".html
         working-directory: ${{env.working-directory}}
-      - name: Test TealiumCollectTests-iOS
-        run: fastlane scan --scheme TealiumCollectTests-iOS --output_files CollectTests-iOS.html
-        working-directory: ${{env.working-directory}}
-      - name: Test TealiumLifecycleTests-iOS
-        run: fastlane scan --scheme TealiumLifecycleTests-iOS --output_files LifecycleTests-iOS.html
-        working-directory: ${{env.working-directory}}
-      - name: Test TealiumVisitorServiceTests-iOS
-        run: fastlane scan --scheme TealiumVisitorServiceTests-iOS --output_files VisitorServiceTests-iOS.html
-        working-directory: ${{env.working-directory}}
-      - name: Test TealiumTagManagementTests-iOS
-        run: fastlane scan --scheme TealiumTagManagementTests-iOS --output_files TagManagementTests-iOS.html
-        working-directory: ${{env.working-directory}}
-      - name: Test TealiumRemoteCommandsTests-iOS
-        run: fastlane scan --scheme TealiumRemoteCommandsTests-iOS --output_files RemoteCommandsTests-iOS.html
-        working-directory: ${{env.working-directory}}
-      - name: Test TealiumAttributionTests-iOS
-        run: fastlane scan --scheme TealiumAttributionTests-iOS --output_files AttributionTests-iOS.html
-        working-directory: ${{env.working-directory}}
-      - name: Test TealiumAutoTrackingTests-iOS
-        run: fastlane scan --scheme TealiumAutoTrackingTests-iOS --output_files AutotrackingTests-iOS.html
-        working-directory: ${{env.working-directory}}
+      # - name: Test TealiumCollectTests-iOS
+      #   run: fastlane scan --scheme TealiumCollectTests-iOS --output_files CollectTests-iOS.html
+      #   working-directory: ${{env.working-directory}}
+      # - name: Test TealiumLifecycleTests-iOS
+      #   run: fastlane scan --scheme TealiumLifecycleTests-iOS --output_files LifecycleTests-iOS.html
+      #   working-directory: ${{env.working-directory}}
+      # - name: Test TealiumVisitorServiceTests-iOS
+      #   run: fastlane scan --scheme TealiumVisitorServiceTests-iOS --output_files VisitorServiceTests-iOS.html
+      #   working-directory: ${{env.working-directory}}
+      # - name: Test TealiumTagManagementTests-iOS
+      #   run: fastlane scan --scheme TealiumTagManagementTests-iOS --output_files TagManagementTests-iOS.html
+      #   working-directory: ${{env.working-directory}}
+      # - name: Test TealiumRemoteCommandsTests-iOS
+      #   run: fastlane scan --scheme TealiumRemoteCommandsTests-iOS --output_files RemoteCommandsTests-iOS.html
+      #   working-directory: ${{env.working-directory}}
+      # - name: Test TealiumAttributionTests-iOS
+      #   run: fastlane scan --scheme TealiumAttributionTests-iOS --output_files AttributionTests-iOS.html
+      #   working-directory: ${{env.working-directory}}
+      # - name: Test TealiumAutoTrackingTests-iOS
+      #   run: fastlane scan --scheme TealiumAutoTrackingTests-iOS --output_files AutotrackingTests-iOS.html
+      #   working-directory: ${{env.working-directory}}
         # todo: location tests
       - name: archive code coverage results
         uses: actions/upload-artifact@v2
