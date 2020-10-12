@@ -31,7 +31,7 @@ jobs:
           - TealiumTagManagement
           - TealiumVisitorService
           - TealiumAttribution
-          - TealiumAutoTracking
+          - TealiumAutotracking
     steps:
       - uses: actions/checkout@v2
       - name: Build iOS - ${{ matrix.scheme }}
