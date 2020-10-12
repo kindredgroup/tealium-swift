@@ -21,11 +21,11 @@ jobs:
       working-directory: ./builder
     strategy:
       matrix:
-        destination: ["platform=iOS Simulator,OS=14.0,name=iPhone 11 Pro","platform=iOS Simulator,OS=13.1,name=iPhone 9"]
+        destination: ["platform=iOS Simulator,OS=14.0,name=iPhone 11 Pro","platform=iOS Simulator,OS=13.1,name=iPhone 8"]
         scheme: ["TealiumCore", "TealiumCollect"]
     steps:
       - uses: actions/checkout@v2
-      - name: Build iOS - ${{ matrix.destination }}
+      - name: Build iOS - ${{ matrix.scheme }}
         run: set -o pipefail && env NSUnbufferedIO=YES xcodebuild -project tealium-swift.xcodeproj -scheme "TealiumCore" -destination "${{ matrix.destination }}" clean build | xcpretty
         working-directory: ${{env.working-directory}}
 
