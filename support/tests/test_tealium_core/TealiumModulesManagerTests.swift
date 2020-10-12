@@ -143,25 +143,25 @@ class TealiumModulesManagerTests: XCTestCase {
         XCTAssertEqual(["testGatherTrackData": true, "dummy": true, "eventData": true, "sessionData": true], dataWithEventData as! [String: Bool])
     }
 
-    func testGatherTrackDataWithModulesList() {
-        let modulesManager = self.modulesManager
-        modulesManager.collectors = []
-        modulesManager.dataLayerManager = DummyDataManagerNoData()
-        let collector = DummyCollector(config: testTealiumConfig, delegate: self, diskStorage: nil) { _ in
-
-        }
-        modulesManager.addCollector(collector)
-        let data = modulesManager.gatherTrackData(for: ["testGatherTrackData": true])
-        XCTAssertNotNil(data["enabled_modules"]!)
-        #if os(iOS)
-        XCTAssertTrue((data["enabled_modules"] as! [String]).contains("Dummy"))
-        #else
-        XCTAssertEqual(["Collect", "Dummy"], data["enabled_modules"] as! [String])
-        #endif
-        modulesManager.dataLayerManager = DummyDataManager()
-        let dataWithEventData = modulesManager.gatherTrackData(for: ["testGatherTrackData": true])
-        XCTAssertNotNil(dataWithEventData["enabled_modules"]!)
-    }
+//    func testGatherTrackDataWithModulesList() {
+//        let modulesManager = self.modulesManager
+//        modulesManager.collectors = []
+//        modulesManager.dataLayerManager = DummyDataManagerNoData()
+//        let collector = DummyCollector(config: testTealiumConfig, delegate: self, diskStorage: nil) { _ in
+//
+//        }
+//        modulesManager.addCollector(collector)
+//        let data = modulesManager.gatherTrackData(for: ["testGatherTrackData": true])
+//        XCTAssertNotNil(data["enabled_modules"]!)
+//        #if os(iOS)
+//        XCTAssertTrue((data["enabled_modules"] as! [String]).contains("Dummy"))
+//        #else
+//        XCTAssertEqual(["Collect", "Dummy"], data["enabled_modules"] as! [String])
+//        #endif
+//        modulesManager.dataLayerManager = DummyDataManager()
+//        let dataWithEventData = modulesManager.gatherTrackData(for: ["testGatherTrackData": true])
+//        XCTAssertNotNil(dataWithEventData["enabled_modules"]!)
+//    }
 
     func testConnectionRestored() {
         let modulesManager = self.modulesManager

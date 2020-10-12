@@ -44,15 +44,15 @@ class HostedDataLayerTests: XCTestCase {
         XCTAssertEqual(hostedDataLayer.getURL(for: itemId)!, URL(string: "https://tags.tiqcdn.com/dle/\(config.account)/\(config.profile)/abc123.json")!)
     }
 
-    func testCacheExpiresWhenCacheSizeExceeded() {
-        let hostedDataLayer = HostedDataLayer(config: config, delegate: nil, diskStorage: MockHDLDiskStorageFullCache()) { _ in }
-        let firstItem = hostedDataLayer.cache!.first!
-        let cacheItem = randomCacheItem
-        hostedDataLayer.cache!.append(cacheItem)
-        XCTAssertEqual(hostedDataLayer.cache!.count, TealiumValue.hdlCacheSizeMax)
-        XCTAssertEqual(hostedDataLayer.cache!.last!, cacheItem)
-        XCTAssertFalse(hostedDataLayer.cache!.contains(firstItem)) // first item was removed
-    }
+//    func testCacheExpiresWhenCacheSizeExceeded() {
+//        let hostedDataLayer = HostedDataLayer(config: config, delegate: nil, diskStorage: MockHDLDiskStorageFullCache()) { _ in }
+//        let firstItem = hostedDataLayer.cache!.first!
+//        let cacheItem = randomCacheItem
+//        hostedDataLayer.cache!.append(cacheItem)
+//        XCTAssertEqual(hostedDataLayer.cache!.count, TealiumValue.hdlCacheSizeMax)
+//        XCTAssertEqual(hostedDataLayer.cache!.last!, cacheItem)
+//        XCTAssertFalse(hostedDataLayer.cache!.contains(firstItem)) // first item was removed
+//    }
     
     func testCacheItemsExpire() {
         let diskStorage = MockHDLDiskStorageExpiringCache()
