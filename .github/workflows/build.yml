@@ -4,10 +4,10 @@ on:
   push:
     branches:
     - feature/*
-    - ci-test
+    - ci-tests
   pull_request:
     branches:
-      - ci-test
+      - ci-tests
 
 jobs:
   build_iOS:
