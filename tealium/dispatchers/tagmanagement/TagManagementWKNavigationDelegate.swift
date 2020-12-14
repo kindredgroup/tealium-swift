@@ -38,29 +38,29 @@ extension TagManagementWKWebView: WKNavigationDelegate {
         }
     }
 
-    /// Fix for server-side cookies not being set properly
-    func webView(_ webView: WKWebView,
-                 decidePolicyFor navigationResponse: WKNavigationResponse,
-                 decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-        guard let response = navigationResponse.response as? HTTPURLResponse,
-              let url = navigationResponse.response.url else {
-            decisionHandler(.cancel)
-            return
-        }
-
-        /// Forces WKWebView to respect `Set-Cookie` response headers.
-        /// Without this code, cookies set in this way are not sent on subsequent requests.
-        if let headerFields = response.allHeaderFields as? [String: String] {
-            let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: url)
-            cookies.forEach { cookie in
-                if #available(iOS 11, *) {
-                    webView.configuration.websiteDataStore.httpCookieStore.setCookie(cookie)
-                }
-            }
-        }
-
-        decisionHandler(.allow)
-    }
+//    /// Fix for server-side cookies not being set properly
+//    func webView(_ webView: WKWebView,
+//                 decidePolicyFor navigationResponse: WKNavigationResponse,
+//                 decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+//        guard let response = navigationResponse.response as? HTTPURLResponse,
+//              let url = navigationResponse.response.url else {
+//            decisionHandler(.cancel)
+//            return
+//        }
+//
+//        /// Forces WKWebView to respect `Set-Cookie` response headers.
+//        /// Without this code, cookies set in this way are not sent on subsequent requests.
+//        if let headerFields = response.allHeaderFields as? [String: String] {
+//            let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: url)
+//            cookies.forEach { cookie in
+//                if #available(iOS 11, *) {
+//                    webView.configuration.websiteDataStore.httpCookieStore.setCookie(cookie)
+//                }
+//            }
+//        }
+//
+//        decisionHandler(.allow)
+//    }
 
     /// Decides whether or not a resource should load.
     /// Remote Commands are intercepted here, and do not need to load requests in the WebView.
