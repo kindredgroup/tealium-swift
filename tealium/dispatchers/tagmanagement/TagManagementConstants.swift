@@ -25,6 +25,7 @@ enum TagManagementConfigKey {
     static let delegate = "delegate"
     static let uiview = "ui_view"
     static let cookieObserver = "cookie_observer"
+    static let processPool = "wk_process_pool"
 }
 
 enum TagManagementError: String, LocalizedError {

@@ -116,6 +116,7 @@ class TagManagementWKWebView: NSObject, TagManagementProtocol {
                 WKWebsiteDataStore.default().httpCookieStore.add(self)
             }
             let config = WKWebViewConfiguration()
+            config.processPool = self.tealConfig.webviewProcessPool
             self.webview = WKWebView(frame: .zero, configuration: config)
             self.webview?.navigationDelegate = self
             guard let webview = self.webview else {
